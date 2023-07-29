@@ -23,10 +23,11 @@ const request = context.switchToHttp().getRequest();
 const user:User = request.user;
 
 return this.userService.findOneById(user.id).pipe(
-    map((user: User) => {
-      return roles.includes(user.role); // Check if the user's role is in the allowed roles
+    map((user:User)=> {
+        const hasRole =() => roles.indexOf(user.role) > -1 
+        return true
     })
-  );
+)
 
 console.log(user);
 
