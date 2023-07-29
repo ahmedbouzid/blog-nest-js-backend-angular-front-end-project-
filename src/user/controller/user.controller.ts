@@ -1,4 +1,4 @@
-import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { User } from '../models/user.interface';
 import { Observable, catchError, from, map, of } from 'rxjs';
@@ -7,6 +7,10 @@ import { JwtAuthGuard } from 'src/auth/auth/gards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/auth/gards/roles.guard';
 import { UserRole } from '../models/user.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {diskStorage} from 'multer'
+import {v4 as uuidv4} from 'uuid'
+const path = require('path');
 
 @Controller('users')
 export class UserController {
@@ -71,6 +75,24 @@ export class UserController {
     @Put(':id/role')
     updateRoleOfUser(@Param('id') id ,@Body() user : User) : Observable<User> {
         return this.service.updateRoleOfUser(Number(id) , user)
+    }
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file' ,
+    {
+        storage :diskStorage({
+            destination :'./uploads/profileImages' ,
+            filename: (req , file , cb )=> {
+                const filename :string = path.parse(file.originalname).name.replace(/\s/g,'')+uuidv4() ;
+                const extension : string = path.parse(file.originalname).ext ;
+                cb(null, `${filename}${extension}`)
+                     }
+        })
+    }
+    ))
+    uploadFile(@UploadedFile() file ) : Observable<Object> {
+        console.log(file);
+        
+        return of({imagePath : file.path})
     }
 
 }
