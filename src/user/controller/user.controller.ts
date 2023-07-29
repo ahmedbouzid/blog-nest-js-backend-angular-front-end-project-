@@ -14,12 +14,25 @@ export class UserController {
     constructor(private readonly service: UserService) {}
  
     @Get()
-    index(@Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    index(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query('username') username: string
 ): Observable<Pagination<User>> {
     limit = limit > 100 ? 100 : limit;
+    console.log(username);
+    
+    if (username === null || username === undefined) {
+        return this.service.paginate({page , limit , route :'http://localhost:3000/users' , });
 
-        return this.service.paginate({page , limit , route :'http://localhost:3000/users'});
+    } else {
+        return this.service.paginateFilterByUsernae(
+            { page , limit , route :'http://localhost:3000/users'}, 
+            {username}
+            );
+
+    }
+    
     }
     @Post()
     create(@Body() user: User): Observable<User | Object> {
