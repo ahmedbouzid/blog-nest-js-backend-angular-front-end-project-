@@ -11,8 +11,7 @@ import { UserRole } from '../models/user.entity';
 export class UserController {
     
     constructor(private readonly service: UserService) {}
-    @hasRole(UserRole.ADMIN)
-    @UseGuards(JwtAuthGuard , RolesGuard)
+ 
     @Get()
     findAll(): Observable<User[]> {
         console.log(this.service.findAll());
@@ -50,7 +49,8 @@ export class UserController {
     updateOne(@Param('id') id: string, @Body() user: User): Observable<any> {
         return this.service.updateOne(Number(id), user);
     }
-
+    @hasRole(UserRole.ADMIN)
+    @UseGuards(JwtAuthGuard , RolesGuard)
     @Put(':id/role')
     updateRoleOfUser(@Param('id') id ,@Body() user : User) : Observable<User> {
         return this.service.updateRoleOfUser(Number(id) , user)
