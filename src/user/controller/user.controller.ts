@@ -5,12 +5,13 @@ import { Observable, catchError, from, map, of } from 'rxjs';
 import { hasRole } from 'src/auth/auth/rolesDecorator/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/auth/gards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/auth/gards/roles.guard';
+import { UserRole } from '../models/user.entity';
 
 @Controller('users')
 export class UserController {
     
     constructor(private readonly service: UserService) {}
-    @hasRole('Admin')
+    @hasRole(UserRole.ADMIN)
     @UseGuards(JwtAuthGuard , RolesGuard)
     @Get()
     findAll(): Observable<User[]> {
@@ -49,4 +50,10 @@ export class UserController {
     updateOne(@Param('id') id: string, @Body() user: User): Observable<any> {
         return this.service.updateOne(Number(id), user);
     }
+
+    @Put(':id/role')
+    updateRoleOfUser(@Param('id') id ,@Body() user : User) : Observable<User> {
+        return this.service.updateRoleOfUser(Number(id) , user)
+    }
+
 }
