@@ -12,6 +12,7 @@ import {diskStorage} from 'multer'
 import {v4 as uuidv4} from 'uuid'
 import { AuthGuard } from '@nestjs/passport';
 import { join } from 'path';
+import { UserIsUser } from 'src/auth/auth/gards/UserIsUser.guard';
 const path = require ('path') ;
  export const  storage = {
     storage :diskStorage({
@@ -77,7 +78,7 @@ export class UserController {
     deleteOne(@Param('id') id: string): Observable<User> {
         return this.service.deleteOne(Number(id));
     }
-
+    @UseGuards(JwtAuthGuard ,UserIsUser)
     @Put(':id')
     updateOne(@Param('id') id: string, @Body() user: User): Observable<any> {
         return this.service.updateOne(Number(id), user);
