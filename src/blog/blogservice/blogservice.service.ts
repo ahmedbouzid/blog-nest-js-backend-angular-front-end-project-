@@ -3,9 +3,9 @@ import { Observable, from, map, of, switchMap } from 'rxjs';
 import { BlogEntry } from '../model/blog-entry.interface';
 import { User } from 'src/user/models/user.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BlogEntity } from '../model/blog-entry.entity';
 import { Equal, Repository } from 'typeorm';
 import { UserService } from 'src/user/service/user.service';
+import { BlogEntity } from '../model/blog-entry.entity';
 var slugify = require('slugify')
 @Injectable()
 export class BlogserviceService {

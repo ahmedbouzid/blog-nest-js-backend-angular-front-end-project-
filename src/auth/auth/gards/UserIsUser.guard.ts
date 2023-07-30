@@ -14,7 +14,7 @@ export class UserIsUser implements CanActivate {
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
         const params = request.params ; 
-        const user :User =  request.user.user 
+        const user :User =  request.user
         console.log(params);
         
        return this.userService.findOneById(user.id).pipe(
