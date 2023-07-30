@@ -24,8 +24,9 @@ export class BlogEntity {
 
     @BeforeUpdate()
     updateTimeStamps() {
-        this.updatedAt = new Date ;
+    this.updatedAt = new Date ;
     }
+    
     @Column( {default : 0}) 
     likes : number ;
 

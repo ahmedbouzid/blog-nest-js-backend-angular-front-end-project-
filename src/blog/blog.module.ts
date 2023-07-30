@@ -8,7 +8,7 @@ import { BlogserviceService } from './blogservice/blogservice.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([BlogEntity]), AuthModule, UserModule],
-  controllers: [BlogController, ],
-  providers: [BlogserviceService],
+  controllers: [BlogController  ],
+  providers: [BlogserviceService], 
 })
 export class BlogModule {}
