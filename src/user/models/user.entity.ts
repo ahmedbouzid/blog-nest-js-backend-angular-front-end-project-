@@ -19,6 +19,8 @@ email : string ;
 password : string ;
 @Column({type : 'enum', enum:UserRole, default:UserRole.USER} )
 role : UserRole ;
+@Column({nullable:true , length:200})
+profileImage : string ;
 @BeforeInsert()
 emailToLowerCase() {
     this.email = this.email.toLowerCase() ;
