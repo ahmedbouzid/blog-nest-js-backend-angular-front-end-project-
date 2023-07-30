@@ -16,7 +16,7 @@ name : string ;
 username :string
 @Column()
 email : string ;
-@Column()
+@Column({select : false})
 password : string ;
 @Column({type : 'enum', enum:UserRole, default:UserRole.USER} )
 role : UserRole ;
