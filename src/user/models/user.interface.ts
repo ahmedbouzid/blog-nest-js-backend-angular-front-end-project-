@@ -1,3 +1,4 @@
+import { BlogEntry } from "src/blog/model/blog-entry.interface";
 import { UserRole } from "./user.entity";
 
 export interface User {
@@ -8,4 +9,5 @@ export interface User {
     password ?:string ;
     role ?: UserRole ;
     profileImage?: string ;
+    blogEntries ?: BlogEntry[] ;
 }

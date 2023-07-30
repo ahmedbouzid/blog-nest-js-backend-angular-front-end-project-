@@ -5,6 +5,7 @@ import { ConfigModule , ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { BlogModule } from './blog/blog.module';
 import * as path from 'path';
 
 @Module({
@@ -29,6 +30,8 @@ import * as path from 'path';
     UserModule,
 
     AuthModule,
+
+    BlogModule,
   ],
   controllers: [AppController], 
   providers: [AppService],
