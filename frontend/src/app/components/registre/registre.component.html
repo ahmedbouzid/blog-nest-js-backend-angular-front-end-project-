@@ -1,1 +1,26 @@
-<p>registre works!</p>
+<h1 style="text-align: center;">Registre</h1>
+<form [formGroup]="registreForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <mat-form-field>
+        <input matInput placeholder="full name" formControlName="name" type="text">
+        <mat-hint *ngIf="registreForm.get('name')?.errors">Full name required</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username" type="text">
+      <mat-hint *ngIf="registreForm.get('username')?.errors">username required</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="email" formControlName="email" type="email">
+    <mat-hint *ngIf="registreForm.get('email')?.errors">Email is required</mat-hint>
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Your password" formControlName="password" type="password">
+  <mat-hint *ngIf="registreForm.get('password')?.errors">password required</mat-hint>
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="confirm Yout pass" formControlName="passwordConfirm" type="text">
+  <mat-hint *ngIf="registreForm.get('passwordConfirm')?.errors">password confirmation is required</mat-hint>
+</mat-form-field>
+<button mat-flat-button color="primary" [disabled]="!registreForm.valid"> Registre</button>
+  </div>
+</form>

@@ -9,7 +9,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { RegistreComponent } from './components/registre/registre.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,12 @@ import { AuthService } from './services/auth.service';
     MatToolbarModule,
     MatIconModule ,
     HttpClientModule ,
+    FormsModule ,
+    ReactiveFormsModule ,
+    MatFormFieldModule ,
+    MatInputModule ,
+    MatButtonModule
+
 
   ],
   providers: [],
